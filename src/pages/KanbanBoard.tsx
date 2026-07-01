@@ -15,7 +15,7 @@ export default function KanbanBoard() {
   // fetch the task
   const fetchTasks = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/tasks");
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/tasks`);
       const data = await res.json();
       setTasks(data);
     } catch (err) {
@@ -34,7 +34,7 @@ export default function KanbanBoard() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/tasks", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/tasks`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -56,7 +56,7 @@ export default function KanbanBoard() {
   // move the task
   const moveTask = async (id: string, status: Task["status"]) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/tasks/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/tasks/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),

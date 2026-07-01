@@ -72,7 +72,7 @@ export default function MeetingRoom() {
 
   // ---------------- SOCKET + WEBRTC ----------------
   useEffect(() => {
-    socket.current = io("http://localhost:5000");
+    socket.current = io(import.meta.env.VITE_API_URL);
 
     socket.current.on("connect", () => {
       socket.current.emit("join-room",{  
@@ -155,7 +155,7 @@ export default function MeetingRoom() {
 
   // ---------------- TASKS ----------------
   useEffect(() => {
-    fetch(`http://localhost:5000/api/tasks?roomId=${roomId}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/tasks?roomId=${roomId}`)
       .then((res) => res.json())
       .then(setTasks)
       .catch(console.log);
@@ -206,7 +206,7 @@ export default function MeetingRoom() {
 
   // ---------------- TASKS ----------------
   const createTask = async () => {
-    const res = await fetch("http://localhost:5000/api/tasks", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/tasks`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -222,7 +222,7 @@ export default function MeetingRoom() {
   };
 
   const updateTaskStatus = async (taskId: string, status: string) => {
-    const res = await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/tasks/${taskId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
@@ -264,7 +264,7 @@ export default function MeetingRoom() {
 
   // ---------------- AI ----------------
   const generateTranscript = async () => {
-    const res = await fetch("http://localhost:5000/api/ai/transcribe", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/ai/transcribe`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -277,7 +277,7 @@ export default function MeetingRoom() {
   };
 
   const generateSummary = async () => {
-    const res = await fetch("http://localhost:5000/api/ai/summary", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/ai/summary`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ transcript }),
@@ -290,7 +290,7 @@ export default function MeetingRoom() {
 
   // ---------------- SAVE + LEAVE ----------------
   const saveMeeting = async () => {
-    await fetch("http://localhost:5000/api/history/create", {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/history/create`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

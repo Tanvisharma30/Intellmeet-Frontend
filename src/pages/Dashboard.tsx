@@ -28,7 +28,7 @@ export default function Dashboard() {
 
   // history 
   useEffect(() => {
-    fetch("http://localhost:5000/api/history/all") 
+    fetch(`${import.meta.env.VITE_API_URL}/api/history/all`) 
       .then(async (res) => { 
         const data = await res.json();
         return Array.isArray(data) ? data : []; 
@@ -39,7 +39,7 @@ export default function Dashboard() {
 
   //upcoming meet
   useEffect(() => { 
-    fetch("http://localhost:5000/api/meetings") 
+    fetch(`${import.meta.env.VITE_API_URL}/api/meetings`) 
       .then(async (res) => { 
         const data = await res.json();
         return Array.isArray(data) ? data : []; 
@@ -53,7 +53,7 @@ export default function Dashboard() {
   // notifications
   useEffect(() => {
     const fetchNotifications = () => {
-      fetch("http://localhost:5000/api/notifications")
+      fetch(`${import.meta.env.VITE_API_URL}/api/notifications`)
         .then((res) => res.json())
         .then(setNotifications)
         .catch(console.log);
@@ -66,7 +66,7 @@ export default function Dashboard() {
   }, []);
 
   const markAsRead = async (id: string) => {
-    await fetch(`http://localhost:5000/api/notifications/${id}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/notifications/${id}`, {
       method: "PUT",
     });
 

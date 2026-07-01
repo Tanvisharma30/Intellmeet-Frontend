@@ -4,7 +4,7 @@ export default function MeetingHistory() {
   const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/history")
+    fetch(`${import.meta.env.VITE_API_URL}/api/history`)
       .then((res) => res.json())
       .then(setData);
   }, []);

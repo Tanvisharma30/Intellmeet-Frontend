@@ -13,7 +13,7 @@ export default function MeetingDetails() {
   useEffect(() => {
     const fetchMeeting = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/meetings`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/meetings`);
         const data = await res.json();
 
         const found = data.find((m: any) => m._id === id);
